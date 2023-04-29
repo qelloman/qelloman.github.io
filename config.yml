@@ -1,6 +1,6 @@
 baseURL: http://qelloman.github.io/
 languageCode: en-us
-title: qel'Log 
+title: Qel'Log 
 theme: "PaperMod"
 
 enableRobotsTXT: true
@@ -52,7 +52,7 @@ params:
     safari_pinned_tab: "<link / abs url>"
 
   label:
-    text: "Home"
+    text: "Qel'Log"
     icon: /apple-touch-icon.png
     iconHeight: 35
 
@@ -113,8 +113,8 @@ params:
 menu:
   main:
     - identifier: categories
-      name: categories
-      url: /categories/
+      name: Posts
+      url: /post/
       weight: 10
     - identifier: tags
       name: tags
