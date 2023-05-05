@@ -1,6 +1,7 @@
 ---
 title: "Bayesian Statistics"
 date: 2023-05-01T19:43:25+09:00
+math: true
 ---
 
 Bayesian 개념이 나오면 Bayes' Rule에 대해서만 알고 그 근본적인 개념에 대해 계속 헷갈리게 되서 이번 기회에 한번 정리해 보기로 한다.
