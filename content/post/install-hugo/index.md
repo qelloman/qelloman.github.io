@@ -173,8 +173,7 @@ git branch -M main
 git remote add origin https://github.com/qelloman/qelloman-github-io.git
 git push -u origin main
 ```
-![](2023-04-29-21-06-02.png)
-![](2023-04-29-21-06-16.png)
+
 ### 11. page 세팅 및 action 확인
 
 push가 성공적으로 되었다면 github repo 세팅을 바꿔서 웹사이트를 호스팅해야 한다.
@@ -182,6 +181,45 @@ push가 성공적으로 되었다면 github repo 세팅을 바꿔서 웹사이�
 repo의 [setting] - [pages]로 들어가서 [Build and deployment]에서 [Source]를 GitHub Actions로 바꿔준다.
 
 그리고 나서 Actions 항목으로 가면 `page build and development`라는 웹사이트를 빌드하기 위한 action과 우리가 추가해준 workflow가 열심히 돌아가는 것을 확인할 수 있을 것이다.
+
+### (추가) 12. Latex 세팅
+
+마크다운에서 latex를 쓰듯이 Hugo에서도 render하려면 katex라는 것을 써야 한다.
+자세한 것은 [Katex setting](https://mertbakir.gitlab.io/hugo/math-typesetting-in-hugo/) 페이지를 참조하였다.
+
+먼저 https://katex.org/docs/browser.html 페이지에 들어가서 Head 안에 스크립트를 복사해서 `layouts/partials/helpers/katex.html' 파일에 붙여넣는다.
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css"
+    integrity="sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI" crossorigin="anonymous">
+
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"
+    integrity="sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t"
+    crossorigin="anonymous"></script>
+
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false }
+            ]
+        });
+    });
+</script>
+```
+마지막 부분이 추가된 이유는 inline latex를 사용하기 위해 추가된 것이다.
+
+그리고 template을 사용하고 있다면 템플릿에 있는 `header.html` 파일을 복사하여 `layouts/partials` 디렉토리에 붙여 넣고, 마지막에 다음과 같이 추가한다.
+```html
+{{ if .Params.math }}{{ partial "helpers/katex.html" . }}{{ end }}
+```
+
+그리고 markdown이 필요한 포스트에는 `math: true` 옵션을 켜준다.
 
 
 # 참고자료
