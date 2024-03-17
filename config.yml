@@ -112,17 +112,17 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 10
     - identifier: categories
       name: Posts
       url: /post/
-      weight: 10
+      weight: 20
     - identifier: tags
       name: tags
       url: /tags/
-      weight: 20
-    - identifier: example
-      name: example.org
-      url: https://example.org
       weight: 30
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
