@@ -1,5 +1,5 @@
 ---
-title: "(WIP) Building my RL muscle"
+title: "Building my RL muscle"
 date: 2024-03-17T21:45:16+09:00
 math: true
 ---

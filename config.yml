@@ -23,7 +23,7 @@ params:
   # author: ["Me", "You"] # multiple authors
   images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: "January 2, 2006"
-  defaultTheme: auto # dark, light
+  defaultTheme: dark # dark, light
   disableThemeToggle: false
 
   ShowReadingTime: true
@@ -58,29 +58,35 @@ params:
 
   # profile-mode
   profileMode:
-    enabled: false # needs to be explicitly set
-    title: ExampleSite
-    subtitle: "This is subtitle"
-    imageUrl: "<img location>"
+    enabled: True # needs to be explicitly set
+    title: "Hi, I am Doyun Kim \U0001F44B"
+    subtitle: "I am a passionate **AI research scientist**. <br> With a background in chip design, I develop **AI/ML** models and algorithms to **enhance the chip design process.** My interests extend beyond chip design and AI, as I also enjoy observing and interpreting the world in my unique way. Through this blog, I aim to share my curiosity, insights, and viewpoints. Enjoy your reading!."
+    imageUrl: "images/doyunkim_profile.jpeg"
     imageWidth: 120
     imageHeight: 120
     imageTitle: my image
     buttons:
       - name: Posts
-        url: posts
-      - name: Tags
-        url: tags
+        url: post
+      - name: Projcts
+        url: projects
+      - name: Resume
+        url: "docs/resume-doyunkim.pdf"
 
   # home-info mode
-  homeInfoParams:
-    Title: "Hi there \U0001F44B"
-    Content: Hi, this is Doyun. I'm writing all stuff I cannot remember in this blog. I am working on AI-EDA after certain period of time doing circuit design.
+  # homeInfoParams:
+  #   Title: "Hi, I'm Doyun Kim \U0001F44B"
+  #   Content: "I am a passionate **AI research scientist**. With a background in chip design, I develop **AI/ML** models and algorithms to **enhance the chip design process.** My interests extend beyond chip design and AI, as I also enjoy observing and interpreting the world in my unique way. Through this blog, I aim to share my curiosity, insights, and viewpoints. Enjoy your reading!."
 
   socialIcons:
     - name: github
       url: "https://github.com/qelloman"
     - name: linkedin
       url: "https://www.linkedin.com/in/doyunkm/"
+    - name: "googlescholar"
+      url: "https://scholar.google.com/citations?user=l6rFvhsAAAAJ&hl=en"
+
+  profileImage: "images/doyunkim_profile.jpeg"
 
   analytics:
     google:
@@ -112,17 +118,13 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
-    - identifier: about
-      name: About
-      url: /about/
-      weight: 10
-    - identifier: categories
+    - identifier: Posts
       name: Posts
       url: /post/
       weight: 20
-    - identifier: tags
-      name: tags
-      url: /tags/
+    - identifier: projects
+      name: Projects
+      url: /projects/
       weight: 30
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
