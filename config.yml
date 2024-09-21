@@ -88,6 +88,8 @@ params:
 
   profileImage: "images/doyunkim_profile.jpeg"
 
+  googleAnalytics: "UA-111344447-1"
+
   analytics:
     google:
       SiteVerificationTag: "XYZabc"
