@@ -11,8 +11,8 @@ Feel free to reach out!
 |----------|------|
 | **Email** | doyunkm@gmail.com |
 | **Location** | New York, NY |
-| **GitHub** | github.com/qelloman |
-| **Website** | doyunkim.com |
+| **GitHub** | [github.com/qelloman](https://github.com/qelloman) |
+| **LinkedIn** | [linkedin.com/in/doyunkm](https://linkedin.com/in/doyunkm) |
 
 ---
 

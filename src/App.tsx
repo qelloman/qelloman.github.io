@@ -1,9 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { theme } from './theme';
 import { filesystem, resolvePath, getVisibleEntries, getPathString } from './data/filesystem';
 import type { FSNode } from './data/filesystem';
 import { useKeyboard } from './hooks/useKeyboard';
 import type { KeyAction } from './hooks/useKeyboard';
+import { useMediaQuery } from './hooks/useMediaQuery';
 import { TitleBar } from './components/TitleBar';
 import { FileTree } from './components/FileTree';
 import { Preview } from './components/Preview';
@@ -13,13 +14,21 @@ import { StatusBar } from './components/StatusBar';
 type Panel = 'tree' | 'preview' | 'cmd';
 
 function App() {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const [sidebarVisible, setSidebarVisible] = useState(true);
   const [currentPath, setCurrentPath] = useState<string[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [previewSelectedIndex, setPreviewSelectedIndex] = useState(0);
   const [activePanel, setActivePanel] = useState<Panel>('tree');
-  const [previewNode, setPreviewNode] = useState<FSNode | null>(null);
+  const aboutFile = filesystem.children?.find((c) => c.name === 'about.md') ?? null;
+  const [previewNode, setPreviewNode] = useState<FSNode | null>(aboutFile);
   const [previewPath, setPreviewPath] = useState<string[]>([]);
   const [cmdOutput, setCmdOutput] = useState<string[]>([]);
+
+  // Auto-hide sidebar on mobile
+  useEffect(() => {
+    setSidebarVisible(!isMobile);
+  }, [isMobile]);
 
   const currentDir = resolvePath(currentPath) ?? filesystem;
   const entries = getVisibleEntries(currentDir);
@@ -52,8 +61,9 @@ function App() {
       setPreviewNode(entry);
       setPreviewPath(currentPath);
       setActivePanel('preview');
+      if (isMobile) setSidebarVisible(false);
     }
-  }, [entries, currentPath, navigateTo]);
+  }, [entries, currentPath, navigateTo, isMobile]);
 
   const openPreviewEntry = useCallback((index: number) => {
     const entry = previewEntries[index];
@@ -241,17 +251,23 @@ function App() {
       color: theme.text,
       fontFamily: "'JetBrains Mono', 'Fira Code', 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace",
     }}>
-      <TitleBar path={getPathString(currentPath)} />
+      <TitleBar
+        path={getPathString(currentPath)}
+        sidebarVisible={sidebarVisible}
+        onToggleSidebar={() => setSidebarVisible((v) => !v)}
+      />
 
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-        <FileTree
-          entries={entries}
-          selectedIndex={selectedIndex}
-          currentPath={currentPath}
-          focused={activePanel === 'tree'}
-          onSelect={selectEntry}
-          onOpen={openEntry}
-        />
+        {sidebarVisible && (
+          <FileTree
+            entries={entries}
+            selectedIndex={selectedIndex}
+            currentPath={currentPath}
+            focused={activePanel === 'tree'}
+            onSelect={selectEntry}
+            onOpen={openEntry}
+          />
+        )}
         <Preview
           node={previewNode}
           path={previewPath}

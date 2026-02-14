@@ -64,7 +64,7 @@ function buildFilesystem(): FSNode {
   return {
     name: '~',
     type: 'directory',
-    children: [...sortByDateDesc(rootFiles), ...dirNodes],
+    children: [...dirNodes, ...sortByDateDesc(rootFiles)],
   };
 }
 
